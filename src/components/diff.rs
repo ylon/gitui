@@ -269,7 +269,7 @@ impl DiffComponent {
                 self,
                 "copy to clipboard error:",
                 crate::clipboard::copy_string(
-                    &lines_to_copy.join("\n")
+                    lines_to_copy.join("\n")
                 )
             );
         }
