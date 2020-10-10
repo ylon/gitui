@@ -32,10 +32,9 @@ fn execute_copy_command(
 
 #[cfg(all(feature = "clipboard", target_os = "linux"))]
 pub fn copy_string(string: &str) -> Result<()> {
-    execute_copy_command(
-        Command::new("xclip").arg("-selection").arg("clipboard"),
-        string,
-    )
+    let mut cmd = Command::new("xclip");
+    cmd.arg("-selection").arg("clipboard");
+    execute_copy_command(cmd, string)
 }
 
 #[cfg(all(feature = "clipboard", target_os = "macos"))]
