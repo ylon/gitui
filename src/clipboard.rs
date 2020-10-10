@@ -4,7 +4,7 @@ use std::process::{Command, Stdio};
 
 fn execute_copy_command(
     command: Command,
-    string: String,
+    string: &str,
 ) -> Result<()> {
     use anyhow::anyhow;
 
@@ -31,7 +31,7 @@ fn execute_copy_command(
 }
 
 #[cfg(all(feature = "clipboard", target_os = "linux"))]
-pub fn copy_string(string: String) -> Result<()> {
+pub fn copy_string(string: &str) -> Result<()> {
     execute_copy_command(
         Command::new("xclip").arg("-selection").arg("clipboard"),
         string,
@@ -39,12 +39,12 @@ pub fn copy_string(string: String) -> Result<()> {
 }
 
 #[cfg(all(feature = "clipboard", target_os = "macos"))]
-pub fn copy_string(string: String) -> Result<()> {
+pub fn copy_string(string: &str) -> Result<()> {
     execute_copy_command(Command::new("pbcopy"), string)
 }
 
 #[cfg(all(feature = "clipboard", windows))]
-pub fn copy_string(string: String) -> Result<()> {
+pub fn copy_string(string: &str) -> Result<()> {
     execute_copy_command(Command::new("clip"), string)
 }
 
