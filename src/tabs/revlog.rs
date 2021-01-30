@@ -308,6 +308,9 @@ impl Component for Revlog {
     fn show(&mut self) -> Result<()> {
         self.visible = true;
         self.list.clear();
+        if ! self.commit_details.is_visible() {
+            self.commit_details.toggle_visible()?;
+        }
         self.update()?;
 
         Ok(())
